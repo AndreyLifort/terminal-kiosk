@@ -14,7 +14,7 @@ unclutter -idle 0.5 -root &
 # URL продакшен-сборки.
 # На этапе согласования с партнёрами — GitHub Pages.
 # После переезда — поменять на URL партнёрского хостинга.
-KIOSK_URL="https://<github-user>.github.io/terminal-kiosk/"
+KIOSK_URL="https://andreylifort.github.io/terminal-kiosk/"
 
 # Принудительный сброс закладок/истории/cookies на каждом старте,
 # чтобы Chromium не помнил «куда уходил пользователь»
