@@ -205,30 +205,22 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
   text-transform: uppercase;
 }
 
-/* === BACK BUTTON ========================================================= */
+/* === BACK BUTTON (ghost, under CTA) ===================================== */
 .back-btn {
-  position: absolute;
-  top: 110px;
-  left: 48px;
+  align-self: center;
   display: inline-flex;
   align-items: center;
-  gap: 10px;
-  padding: 14px 22px;
-  border-radius: 14px;
-  background: var(--bg-card);
-  border: 1px solid var(--line);
+  gap: 8px;
+  padding: 10px 18px;
+  border-radius: 10px;
+  background: transparent;
   color: var(--text-muted);
-  font-size: 18px;
+  font-size: 16px;
   font-weight: 600;
-  transition: background 0.18s ease, color 0.18s ease, border-color 0.18s ease;
-  z-index: 4;
-  box-shadow: 0 2px 8px rgba(10, 22, 40, 0.04);
+  transition: background 0.15s ease, color 0.15s ease;
 }
-.back-btn:active {
-  background: var(--ink);
-  color: #FFFFFF;
-  border-color: var(--ink);
-}
+.back-btn:hover { color: var(--ink); }
+.back-btn:active { background: rgba(10, 22, 40, 0.06); color: var(--ink); }
 
 /* === PHONE CARD ========================================================== */
 .phone-card {
@@ -380,7 +372,6 @@ body.lead-active .phone-card__label { font-size: 14px; }
 body.lead-active .phone-input { font-size: 30px; padding: 16px 20px; }
 body.lead-active .cta-btn { padding: 18px 28px; font-size: 22px; }
 body.lead-active .badge { padding: 6px 14px; font-size: 12px; }
-body.lead-active .back-btn { top: 96px; left: 56px; }
 
 /* Клавиатура — фиксируется справа в центре экрана */
 body.lead-active .keyboard {
