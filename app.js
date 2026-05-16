@@ -59,6 +59,7 @@
     clearTimeout(thanksTimer);
     stopIdle();
     Numpad.close();
+    document.body.classList.remove('lead-active');
 
     const { path, params } = parseHash();
 
@@ -73,6 +74,8 @@
       Numpad.reset();
       submitBtn.disabled = true;
       show('lead');
+      document.body.classList.add('lead-active');
+      Numpad.open();                          // клавиатура всегда видна на /lead
       startIdle();
       return;
     }
@@ -145,11 +148,12 @@
   submitBtn.addEventListener('click', async () => {
     if (!currentLead || !currentLead.phone) return;
     submitBtn.disabled = true;
-    submitBtn.textContent = 'Отправляем…';
+    submitBtn.textContent = window.I18N ? I18N.t('lead.submitting') : 'Отправляем…';
 
     const payload = {
       phone:      currentLead.phone,
       source:     currentLead.source,
+      lang:       (window.I18N && I18N.current) || 'ru',
       userAgent:  navigator.userAgent,
       terminalId: TERMINAL_ID,
       ts:         new Date().toISOString(),
@@ -158,7 +162,7 @@
     const ok = await sendLead(payload);
     if (!ok) queueLead(payload);    // даже при no-cors-success мы не знаем результат, но не страшно
 
-    submitBtn.textContent = 'Оставить номер';
+    submitBtn.textContent = window.I18N ? I18N.t('lead.submit') : 'Оставить номер';
     location.hash = '#/lead?sent=1';
   });
 

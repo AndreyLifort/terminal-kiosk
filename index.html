@@ -12,7 +12,14 @@
 <body>
   <header class="topbar">
     <img class="topbar__logo" src="./assets/logo.svg" alt="Криптомат" />
-    <div class="topbar__clock" id="clock">00:00</div>
+
+    <div class="topbar__right">
+      <div class="lang-switch" role="group" aria-label="Language">
+        <button class="lang-switch__btn is-active" data-lang="ru" type="button">RU</button>
+        <button class="lang-switch__btn" data-lang="en" type="button">EN</button>
+      </div>
+      <div class="topbar__clock" id="clock">00:00</div>
+    </div>
   </header>
 
   <main id="app">
@@ -20,48 +27,48 @@
     <!-- ЭКРАН 1: СТАРТОВАЯ -->
     <section class="screen screen--start" data-screen="start" hidden>
       <div class="screen__inner">
-        <h1 class="screen__title">Что вас интересует?</h1>
-        <p class="screen__subtitle">Коснитесь нужного действия на экране</p>
+        <h1 class="screen__title" data-i18n="start.title">Что вас интересует?</h1>
+        <p class="screen__subtitle" data-i18n="start.subtitle">Коснитесь нужного действия на экране</p>
 
         <div class="choice-grid">
           <button class="choice" data-action="lead" data-src="crypto" type="button">
             <span class="choice__icon" aria-hidden="true">
               <object type="image/svg+xml" data="./assets/icon-crypto.svg"></object>
             </span>
-            <span class="choice__title">Купить криптовалюту</span>
-            <span class="choice__desc">USDT, BTC и другие — за наличные</span>
+            <span class="choice__title" data-i18n="start.crypto.title">Купить криптовалюту</span>
+            <span class="choice__desc"  data-i18n="start.crypto.desc">USDT, BTC и другие — за наличные</span>
           </button>
 
           <button class="choice" data-action="lead" data-src="ai" type="button">
             <span class="choice__icon" aria-hidden="true">
               <object type="image/svg+xml" data="./assets/icon-ai.svg"></object>
             </span>
-            <span class="choice__title">Оплатить нейросети</span>
-            <span class="choice__desc">ChatGPT, Midjourney и другие сервисы</span>
+            <span class="choice__title" data-i18n="start.ai.title">Оплатить нейросети</span>
+            <span class="choice__desc"  data-i18n="start.ai.desc">ChatGPT, Midjourney и другие сервисы</span>
           </button>
         </div>
 
-        <p class="screen__hint">Безопасно · Анонимно · Быстро</p>
+        <p class="screen__hint" data-i18n="start.hint">Безопасно · Анонимно · Быстро</p>
       </div>
     </section>
 
     <!-- ЭКРАН 2: ВВОД ТЕЛЕФОНА -->
     <section class="screen screen--lead" data-screen="lead" hidden>
-      <button class="back-btn" data-action="back" type="button" aria-label="Назад">
+      <button class="back-btn" data-action="back" type="button" data-i18n-aria="lead.back">
         <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
-        <span>Назад</span>
+        <span data-i18n="lead.back">Назад</span>
       </button>
 
       <div class="screen__inner">
-        <div class="badge">Скоро запуск</div>
-        <h1 class="screen__title">Совсем скоро — здесь!</h1>
-        <p class="screen__subtitle screen__subtitle--wide">
+        <div class="badge" data-i18n="lead.badge">Скоро запуск</div>
+        <h1 class="screen__title" data-i18n="lead.title">Совсем скоро — здесь!</h1>
+        <p class="screen__subtitle screen__subtitle--wide" data-i18n="lead.subtitle">
           Мы готовим эту услугу прямо сейчас, чтобы вы могли пользоваться ею удобно и без лишних шагов.
           Оставьте номер — и мы первым делом сообщим вам, как только всё будет готово.
         </p>
 
         <div class="phone-card">
-          <label class="phone-card__label" for="phone-input">Ваш номер телефона</label>
+          <label class="phone-card__label" for="phone-input" data-i18n="lead.phoneLabel">Ваш номер телефона</label>
           <input
             id="phone-input"
             class="phone-input"
@@ -71,7 +78,7 @@
             value="+7 (___) ___-__-__"
             autocomplete="off"
           />
-          <button id="submit-btn" class="cta-btn" type="button" disabled>Оставить номер</button>
+          <button id="submit-btn" class="cta-btn" type="button" disabled data-i18n="lead.submit">Оставить номер</button>
         </div>
       </div>
     </section>
@@ -82,11 +89,11 @@
         <div class="thanks-icon">
           <object type="image/svg+xml" data="./assets/icon-check.svg"></object>
         </div>
-        <h1 class="screen__title">Спасибо! Номер записан.</h1>
-        <p class="screen__subtitle screen__subtitle--wide">
+        <h1 class="screen__title" data-i18n="thanks.title">Спасибо! Номер записан.</h1>
+        <p class="screen__subtitle screen__subtitle--wide" data-i18n="thanks.subtitle">
           Мы обязательно оповестим вас, как только этот функционал станет доступен. До скорой встречи!
         </p>
-        <p class="screen__footnote">Возвращаемся на главный экран…</p>
+        <p class="screen__footnote" data-i18n="thanks.footnote">Возвращаемся на главный экран…</p>
         <div class="progress"><div class="progress__bar" id="thanks-progress"></div></div>
       </div>
     </section>
@@ -117,6 +124,7 @@
   </div>
 
   <script src="./config.js"></script>
+  <script src="./i18n.js"></script>
   <script src="./keyboard.js"></script>
   <script src="./app.js"></script>
 </body>

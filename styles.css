@@ -52,12 +52,43 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 
 .topbar__logo { height: 52px; }
 
+.topbar__right {
+  display: flex;
+  align-items: center;
+  gap: 22px;
+}
+
 .topbar__clock {
   font-variant-numeric: tabular-nums;
   font-size: 22px;
   font-weight: 600;
   color: var(--text-muted);
   letter-spacing: 0.04em;
+}
+
+.lang-switch {
+  display: inline-flex;
+  gap: 4px;
+  background: var(--bg-card);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 4px;
+  box-shadow: 0 2px 6px rgba(10, 22, 40, 0.05);
+}
+.lang-switch__btn {
+  padding: 8px 14px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: var(--text-muted);
+  min-width: 48px;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+.lang-switch__btn:not(.is-active):active { background: rgba(10, 22, 40, 0.06); }
+.lang-switch__btn.is-active {
+  background: var(--ink);
+  color: #FFFFFF;
 }
 
 /* === MAIN / SCREEN ======================================================== */
@@ -333,6 +364,39 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 .key--del { color: var(--gold-deep); }
 .key--del:active { color: #FFFFFF; }
 .key--wide { color: var(--text-muted); }
+
+/* === LEAD SCREEN: two-column layout (text+form | keyboard) ============== */
+body.lead-active #app {
+  align-items: flex-start;
+  justify-content: flex-start;
+  padding: 110px 460px 32px 56px;            /* right: место под боковую клавиатуру */
+}
+body.lead-active .screen--lead { max-width: none; align-self: flex-start; width: 100%; }
+body.lead-active .screen__inner { align-items: flex-start; text-align: left; gap: 14px; }
+body.lead-active .screen__title { font-size: 42px; }
+body.lead-active .screen__subtitle { font-size: 18px; max-width: 580px; }
+body.lead-active .phone-card { margin-top: 14px; padding: 22px 26px 24px; gap: 14px; max-width: 580px; }
+body.lead-active .phone-card__label { font-size: 14px; }
+body.lead-active .phone-input { font-size: 30px; padding: 16px 20px; }
+body.lead-active .cta-btn { padding: 18px 28px; font-size: 22px; }
+body.lead-active .badge { padding: 6px 14px; font-size: 12px; }
+body.lead-active .back-btn { top: 96px; left: 56px; }
+
+/* Клавиатура — фиксируется справа в центре экрана */
+body.lead-active .keyboard {
+  left: auto;
+  right: 32px;
+  bottom: auto;
+  top: 50%;
+  width: 384px;
+  padding: 14px 16px 18px;
+  transform: translateY(-50%);
+}
+body.lead-active .keyboard.is-open { transform: translateY(-50%); }
+body.lead-active .keyboard__grip { display: none; }
+body.lead-active .keyboard__grid { gap: 10px; }
+body.lead-active .key { height: 64px; font-size: 28px; }
+body.lead-active [data-key="hide"] { visibility: hidden; pointer-events: none; }
 
 /* === RESOLUTIONS ========================================================= */
 /* 1280x1024 — baseline */
