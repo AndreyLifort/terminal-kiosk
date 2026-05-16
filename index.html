@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
+  <meta name="referrer" content="no-referrer" />
+  <meta name="format-detection" content="telephone=no" />
+  <title>Криптомат — крипто-терминал</title>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%23C9921A'/%3E%3Ctext x='50' y='70' font-family='Segoe UI,sans-serif' font-size='60' font-weight='800' fill='%230A1628' text-anchor='middle'%3EК%3C/text%3E%3C/svg%3E" />
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+<body>
+  <header class="topbar">
+    <img class="topbar__logo" src="./assets/logo.svg" alt="Криптомат" />
+    <div class="topbar__clock" id="clock">00:00</div>
+  </header>
+
+  <main id="app">
+
+    <!-- ЭКРАН 1: СТАРТОВАЯ -->
+    <section class="screen screen--start" data-screen="start" hidden>
+      <div class="screen__inner">
+        <h1 class="screen__title">Что вас интересует?</h1>
+        <p class="screen__subtitle">Коснитесь нужного действия на экране</p>
+
+        <div class="choice-grid">
+          <button class="choice" data-action="lead" data-src="crypto" type="button">
+            <span class="choice__icon" aria-hidden="true">
+              <object type="image/svg+xml" data="./assets/icon-crypto.svg"></object>
+            </span>
+            <span class="choice__title">Купить криптовалюту</span>
+            <span class="choice__desc">USDT, BTC и другие — за наличные</span>
+          </button>
+
+          <button class="choice" data-action="lead" data-src="ai" type="button">
+            <span class="choice__icon" aria-hidden="true">
+              <object type="image/svg+xml" data="./assets/icon-ai.svg"></object>
+            </span>
+            <span class="choice__title">Оплатить нейросети</span>
+            <span class="choice__desc">ChatGPT, Midjourney и другие сервисы</span>
+          </button>
+        </div>
+
+        <p class="screen__hint">Безопасно · Анонимно · Быстро</p>
+      </div>
+    </section>
+
+    <!-- ЭКРАН 2: ВВОД ТЕЛЕФОНА -->
+    <section class="screen screen--lead" data-screen="lead" hidden>
+      <button class="back-btn" data-action="back" type="button" aria-label="Назад">
+        <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+        <span>Назад</span>
+      </button>
+
+      <div class="screen__inner">
+        <div class="badge">Скоро запуск</div>
+        <h1 class="screen__title">Совсем скоро — здесь!</h1>
+        <p class="screen__subtitle screen__subtitle--wide">
+          Мы готовим эту услугу прямо сейчас, чтобы вы могли пользоваться ею удобно и без лишних шагов.
+          Оставьте номер — и мы первым делом сообщим вам, как только всё будет готово.
+        </p>
+
+        <div class="phone-card">
+          <label class="phone-card__label" for="phone-input">Ваш номер телефона</label>
+          <input
+            id="phone-input"
+            class="phone-input"
+            type="tel"
+            inputmode="none"
+            readonly
+            value="+7 (___) ___-__-__"
+            autocomplete="off"
+          />
+          <button id="submit-btn" class="cta-btn" type="button" disabled>Оставить номер</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ЭКРАН 3: СПАСИБО -->
+    <section class="screen screen--thanks" data-screen="thanks" hidden>
+      <div class="screen__inner">
+        <div class="thanks-icon">
+          <object type="image/svg+xml" data="./assets/icon-check.svg"></object>
+        </div>
+        <h1 class="screen__title">Спасибо! Номер записан.</h1>
+        <p class="screen__subtitle screen__subtitle--wide">
+          Мы обязательно оповестим вас, как только этот функционал станет доступен. До скорой встречи!
+        </p>
+        <p class="screen__footnote">Возвращаемся на главный экран…</p>
+        <div class="progress"><div class="progress__bar" id="thanks-progress"></div></div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ЦИФРОВАЯ КЛАВИАТУРА -->
+  <div class="keyboard" id="keyboard" aria-hidden="true">
+    <div class="keyboard__grip"></div>
+    <div class="keyboard__grid">
+      <button class="key" data-key="1" type="button">1</button>
+      <button class="key" data-key="2" type="button">2</button>
+      <button class="key" data-key="3" type="button">3</button>
+      <button class="key" data-key="4" type="button">4</button>
+      <button class="key" data-key="5" type="button">5</button>
+      <button class="key" data-key="6" type="button">6</button>
+      <button class="key" data-key="7" type="button">7</button>
+      <button class="key" data-key="8" type="button">8</button>
+      <button class="key" data-key="9" type="button">9</button>
+      <button class="key key--wide" data-key="hide" type="button" aria-label="Скрыть клавиатуру">
+        <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M7 10l5 5 5-5"/></svg>
+      </button>
+      <button class="key" data-key="0" type="button">0</button>
+      <button class="key key--del" data-key="del" type="button" aria-label="Удалить цифру">
+        <svg viewBox="0 0 24 24" width="32" height="32" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M22 5h-12l-7 7 7 7h12a2 2 0 002-2V7a2 2 0 00-2-2zM18 9l-5 5M13 9l5 5"/></svg>
+      </button>
+    </div>
+  </div>
+
+  <script src="./config.js"></script>
+  <script src="./keyboard.js"></script>
+  <script src="./app.js"></script>
+</body>
+</html>

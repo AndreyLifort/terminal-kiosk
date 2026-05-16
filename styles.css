@@ -1,0 +1,366 @@
+:root {
+  --bg: #F5F1E8;                          /* молочный — основной фон */
+  --bg-card: #FFFFFF;                     /* карточки и поля */
+  --bg-card-hover: #FAF7EF;
+  --bg-key: #F0EADC;                      /* клавиши клавиатуры */
+  --line: rgba(10, 22, 40, 0.10);
+  --line-strong: rgba(201, 146, 26, 0.55);
+  --gold: #C9921A;
+  --gold-deep: #A77A12;                   /* затемнённое золото для текста на светлом */
+  --gold-soft: rgba(201, 146, 26, 0.12);
+  --ink: #0A1628;                         /* основной тёмный (тексты и тёмные кнопки) */
+  --ink-hover: #1A2A47;
+  --text: #0A1628;
+  --text-muted: #54627A;
+  --text-dim: #8593A6;
+  --shadow: 0 16px 44px rgba(10, 22, 40, 0.10);
+  --shadow-strong: 0 24px 60px rgba(10, 22, 40, 0.16);
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { height: 100%; }
+
+body {
+  background:
+    radial-gradient(1100px 600px at 50% -10%, rgba(201, 146, 26, 0.14), transparent 60%),
+    radial-gradient(900px 600px at 100% 110%, rgba(10, 22, 40, 0.04), transparent 60%),
+    var(--bg);
+  color: var(--ink);
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  font-size: 18px;
+  line-height: 1.45;
+  overflow: hidden;
+  -webkit-font-smoothing: antialiased;
+  -webkit-user-select: none;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+}
+
+button { font-family: inherit; cursor: pointer; border: none; background: none; color: inherit; }
+
+/* === TOPBAR =============================================================== */
+.topbar {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 22px 36px;
+  z-index: 5;
+}
+
+.topbar__logo { height: 52px; }
+
+.topbar__clock {
+  font-variant-numeric: tabular-nums;
+  font-size: 22px;
+  font-weight: 600;
+  color: var(--text-muted);
+  letter-spacing: 0.04em;
+}
+
+/* === MAIN / SCREEN ======================================================== */
+#app {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 96px 48px 48px;
+  position: relative;
+}
+
+.screen { width: 100%; max-width: 1100px; animation: fadeIn 0.45s ease both; }
+.screen[hidden] { display: none !important; }
+.screen__inner { display: flex; flex-direction: column; align-items: center; text-align: center; gap: 22px; }
+
+.screen__title {
+  font-size: 56px;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  line-height: 1.05;
+  color: var(--ink);
+}
+
+.screen__subtitle {
+  font-size: 22px;
+  color: var(--text-muted);
+  max-width: 640px;
+  font-weight: 400;
+}
+.screen__subtitle--wide { max-width: 760px; }
+
+.screen__hint {
+  margin-top: 16px;
+  color: var(--text-dim);
+  font-size: 16px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.screen__footnote {
+  margin-top: 4px;
+  color: var(--text-dim);
+  font-size: 16px;
+}
+
+@keyframes fadeIn { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: none; } }
+
+/* === START SCREEN: TWO BIG CHOICES ======================================== */
+.choice-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 32px;
+  width: 100%;
+  margin-top: 28px;
+}
+
+.choice {
+  background: var(--bg-card);
+  border: 2px solid var(--line);
+  border-radius: 24px;
+  padding: 44px 32px 38px;
+  min-height: 320px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 18px;
+  text-align: center;
+  transition: transform 0.18s ease, border-color 0.18s ease, background 0.18s ease, box-shadow 0.18s ease;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 4px 14px rgba(10, 22, 40, 0.05);
+}
+
+.choice::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(440px 200px at 50% -10%, var(--gold-soft), transparent 70%);
+  opacity: 0;
+  transition: opacity 0.18s ease;
+  pointer-events: none;
+}
+
+.choice:hover, .choice:active {
+  border-color: var(--line-strong);
+  background: var(--bg-card-hover);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow);
+}
+.choice:hover::before, .choice:active::before { opacity: 1; }
+
+.choice__icon {
+  width: 96px; height: 96px;
+  display: flex; align-items: center; justify-content: center;
+  color: var(--gold);
+}
+.choice__icon object { width: 100%; height: 100%; pointer-events: none; }
+
+.choice__title { font-size: 32px; font-weight: 700; line-height: 1.15; color: var(--ink); }
+.choice__desc { font-size: 18px; color: var(--text-muted); font-weight: 400; }
+
+/* === BADGE =============================================================== */
+.badge {
+  display: inline-block;
+  padding: 8px 18px;
+  border-radius: 999px;
+  background: var(--ink);
+  color: var(--gold);
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+/* === BACK BUTTON ========================================================= */
+.back-btn {
+  position: absolute;
+  top: 110px;
+  left: 48px;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 22px;
+  border-radius: 14px;
+  background: var(--bg-card);
+  border: 1px solid var(--line);
+  color: var(--text-muted);
+  font-size: 18px;
+  font-weight: 600;
+  transition: background 0.18s ease, color 0.18s ease, border-color 0.18s ease;
+  z-index: 4;
+  box-shadow: 0 2px 8px rgba(10, 22, 40, 0.04);
+}
+.back-btn:active {
+  background: var(--ink);
+  color: #FFFFFF;
+  border-color: var(--ink);
+}
+
+/* === PHONE CARD ========================================================== */
+.phone-card {
+  width: 100%;
+  max-width: 620px;
+  margin-top: 24px;
+  padding: 36px 36px 32px;
+  background: var(--bg-card);
+  border: 1px solid var(--line);
+  border-radius: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  box-shadow: var(--shadow);
+}
+
+.phone-card__label {
+  font-size: 16px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  text-align: left;
+  font-weight: 600;
+}
+
+.phone-input {
+  width: 100%;
+  background: #FFFFFF;
+  border: 2px solid var(--line);
+  border-radius: 14px;
+  color: var(--ink);
+  font-size: 36px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  padding: 22px 24px;
+  text-align: center;
+  font-variant-numeric: tabular-nums;
+  caret-color: transparent;
+  outline: none;
+  transition: border-color 0.18s ease, box-shadow 0.18s ease;
+}
+.phone-input:focus {
+  border-color: var(--gold);
+  box-shadow: 0 0 0 4px var(--gold-soft);
+}
+
+/* === CTA BUTTON ========================================================== */
+.cta-btn {
+  width: 100%;
+  padding: 22px 32px;
+  border-radius: 14px;
+  background: var(--ink);
+  color: #FFFFFF;
+  font-size: 24px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  transition: background 0.18s ease, transform 0.12s ease, opacity 0.18s ease, box-shadow 0.18s ease;
+  box-shadow: 0 6px 18px rgba(10, 22, 40, 0.18);
+}
+.cta-btn:not(:disabled):hover { background: var(--ink-hover); box-shadow: 0 10px 24px rgba(10, 22, 40, 0.24); }
+.cta-btn:not(:disabled):active { transform: translateY(1px); }
+.cta-btn:disabled { opacity: 0.35; cursor: not-allowed; box-shadow: none; }
+
+/* === THANKS SCREEN ======================================================= */
+.thanks-icon { width: 140px; height: 140px; margin-bottom: 8px; filter: drop-shadow(0 8px 18px rgba(201, 146, 26, 0.25)); }
+.thanks-icon object { width: 100%; height: 100%; pointer-events: none; }
+
+.progress {
+  width: 280px; height: 4px;
+  background: rgba(10, 22, 40, 0.08);
+  border-radius: 999px;
+  overflow: hidden;
+  margin-top: 14px;
+}
+.progress__bar {
+  height: 100%; width: 100%;
+  background: var(--gold);
+  transform-origin: left center;
+  transform: scaleX(1);
+  transition: transform linear;
+}
+
+/* === KEYBOARD ============================================================ */
+.keyboard {
+  position: fixed;
+  left: 50%;
+  bottom: 24px;
+  transform: translate(-50%, calc(100% + 40px));
+  width: min(720px, calc(100% - 48px));
+  background: var(--bg-card);
+  border: 1px solid var(--line);
+  border-radius: 24px;
+  padding: 18px 22px 22px;
+  box-shadow: var(--shadow-strong);
+  transition: transform 0.32s cubic-bezier(.2, .9, .2, 1);
+  z-index: 9;
+}
+.keyboard.is-open { transform: translate(-50%, 0); }
+
+.keyboard__grip {
+  width: 56px;
+  height: 5px;
+  border-radius: 999px;
+  background: rgba(10, 22, 40, 0.15);
+  margin: 0 auto 16px;
+}
+
+.keyboard__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+}
+
+.key {
+  height: 78px;
+  background: var(--bg-key);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  color: var(--ink);
+  font-size: 32px;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.12s ease, transform 0.08s ease, border-color 0.12s ease, color 0.12s ease;
+}
+.key:active {
+  background: var(--ink);
+  color: #FFFFFF;
+  border-color: var(--ink);
+  transform: scale(0.97);
+}
+.key--del { color: var(--gold-deep); }
+.key--del:active { color: #FFFFFF; }
+.key--wide { color: var(--text-muted); }
+
+/* === RESOLUTIONS ========================================================= */
+/* 1280x1024 — baseline */
+
+@media (max-width: 1100px) {
+  .screen__title { font-size: 44px; }
+  .screen__subtitle { font-size: 20px; }
+  .choice { min-height: 280px; padding: 36px 24px; }
+  .choice__title { font-size: 28px; }
+  .topbar__logo { height: 44px; }
+}
+
+@media (max-width: 900px) {
+  .choice-grid { grid-template-columns: 1fr; gap: 20px; }
+  .choice { min-height: 200px; padding: 28px 24px; flex-direction: row; text-align: left; justify-content: flex-start; gap: 24px; }
+  .choice__icon { width: 72px; height: 72px; flex-shrink: 0; }
+  .screen__title { font-size: 36px; }
+  .back-btn { top: 88px; left: 24px; }
+  #app { padding: 88px 24px 32px; }
+  .topbar { padding: 16px 24px; }
+}
+
+@media (max-height: 780px) {
+  .screen__title { font-size: 44px; }
+  .choice { min-height: 240px; padding: 30px 24px; }
+  .choice__icon { width: 76px; height: 76px; }
+  .phone-card { padding: 28px; margin-top: 18px; }
+  .phone-input { font-size: 30px; padding: 18px 20px; }
+  .cta-btn { padding: 18px 28px; font-size: 22px; }
+  .key { height: 64px; font-size: 28px; }
+}
