@@ -6,7 +6,7 @@
  * куда падают строки (можно взять из URL таблицы, между /d/ и /edit).
  */
 
-const SHEET_ID   = 'PASTE_SHEET_ID_HERE';
+const SHEET_ID   = '1Pjp_QZRNGagkISCFRNCoOVlsxLaOtgNz_par9XuFBAk';
 const SHEET_NAME = 'Leads';
 
 function doPost(e) {
