@@ -205,7 +205,7 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
   text-transform: uppercase;
 }
 
-/* === BACK BUTTON (ghost, under CTA) ===================================== */
+/* === BACK BUTTON (ghost) ================================================ */
 .back-btn {
   align-self: center;
   display: inline-flex;
@@ -222,8 +222,97 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 .back-btn:hover { color: var(--ink); }
 .back-btn:active { background: rgba(10, 22, 40, 0.06); color: var(--ink); }
 
-/* === PHONE CARD ========================================================== */
-.phone-card {
+/* === QUIZ (buy flow): прогресс + шаги =================================== */
+.quiz-head {
+  position: absolute;
+  top: 110px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  z-index: 3;
+}
+.quiz-progress { display: inline-flex; gap: 8px; }
+.quiz-progress__dot {
+  width: 36px;
+  height: 6px;
+  border-radius: 999px;
+  background: rgba(10, 22, 40, 0.10);
+  transition: background 0.2s ease;
+}
+.quiz-progress__dot.is-active { background: var(--gold); }
+.quiz-progress__dot.is-done   { background: var(--ink); }
+.quiz-progress__label {
+  font-size: 13px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  font-weight: 600;
+}
+
+.screen--buy { position: relative; }
+
+.quiz-step {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 18px;
+  text-align: center;
+  margin-top: 56px;
+  width: 100%;
+}
+.quiz-step[hidden] { display: none !important; }
+
+.quiz-options {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 24px;
+  margin-top: 18px;
+  width: 100%;
+  max-width: 460px;
+}
+.quiz-options--row {
+  grid-template-columns: 1fr 1fr;
+  max-width: 780px;
+}
+
+.quiz-option {
+  background: var(--bg-card);
+  border: 2px solid var(--line);
+  border-radius: 20px;
+  padding: 28px 24px 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  text-align: center;
+  transition: transform 0.18s ease, border-color 0.18s ease, background 0.18s ease, box-shadow 0.18s ease;
+  box-shadow: 0 4px 14px rgba(10, 22, 40, 0.05);
+  min-height: 220px;
+  justify-content: center;
+}
+.quiz-option:hover, .quiz-option:active {
+  border-color: var(--line-strong);
+  background: var(--bg-card-hover);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow);
+}
+.quiz-option__icon {
+  width: 72px; height: 72px;
+  color: var(--gold);
+  display: flex; align-items: center; justify-content: center;
+}
+.quiz-option__icon object, .quiz-option__icon svg { width: 100%; height: 100%; pointer-events: none; }
+.quiz-option__title { font-size: 26px; font-weight: 700; color: var(--ink); }
+.quiz-option__desc { font-size: 16px; color: var(--text-muted); }
+
+.quiz-actions { margin-top: 8px; }
+
+/* === PHONE CARD / AMOUNT CARD ============================================ */
+.phone-card,
+.amount-card {
   width: 100%;
   max-width: 620px;
   margin-top: 24px;
@@ -246,14 +335,15 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
   font-weight: 600;
 }
 
-.phone-input {
+.phone-input,
+.amount-input {
   width: 100%;
   background: #FFFFFF;
   border: 2px solid var(--line);
   border-radius: 14px;
   color: var(--ink);
   font-size: 36px;
-  font-weight: 600;
+  font-weight: 700;
   letter-spacing: 0.04em;
   padding: 22px 24px;
   text-align: center;
@@ -262,9 +352,17 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
   outline: none;
   transition: border-color 0.18s ease, box-shadow 0.18s ease;
 }
-.phone-input:focus {
+.phone-input:focus,
+.amount-input:focus {
   border-color: var(--gold);
   box-shadow: 0 0 0 4px var(--gold-soft);
+}
+
+.amount-hint {
+  font-size: 14px;
+  color: var(--text-muted);
+  text-align: center;
+  margin-top: -6px;
 }
 
 /* === CTA BUTTON ========================================================== */
@@ -357,24 +455,40 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 .key--del:active { color: #FFFFFF; }
 .key--wide { color: var(--text-muted); }
 
-/* === LEAD SCREEN: two-column layout (text+form | keyboard) ============== */
-body.lead-active #app {
+/* === KBD-SIDE LAYOUT: используется на /lead и на шаге "Сумма" ============ */
+body.kbd-side #app {
   align-items: flex-start;
   justify-content: flex-start;
   padding: 110px 460px 32px 56px;            /* right: место под боковую клавиатуру */
 }
-body.lead-active .screen--lead { max-width: none; align-self: flex-start; width: 100%; }
-body.lead-active .screen__inner { align-items: flex-start; text-align: left; gap: 14px; }
-body.lead-active .screen__title { font-size: 42px; }
-body.lead-active .screen__subtitle { font-size: 18px; max-width: 580px; }
-body.lead-active .phone-card { margin-top: 14px; padding: 22px 26px 24px; gap: 14px; max-width: 580px; }
-body.lead-active .phone-card__label { font-size: 14px; }
-body.lead-active .phone-input { font-size: 30px; padding: 16px 20px; }
-body.lead-active .cta-btn { padding: 18px 28px; font-size: 22px; }
-body.lead-active .badge { padding: 6px 14px; font-size: 12px; }
+body.kbd-side .screen--lead,
+body.kbd-side .screen--buy { max-width: none; align-self: flex-start; width: 100%; }
 
-/* Клавиатура — фиксируется справа в центре экрана */
-body.lead-active .keyboard {
+body.kbd-side .screen__inner,
+body.kbd-side .quiz-step { align-items: flex-start; text-align: left; gap: 14px; }
+
+body.kbd-side .screen__title { font-size: 42px; }
+body.kbd-side .screen__subtitle { font-size: 18px; max-width: 580px; }
+
+body.kbd-side .phone-card,
+body.kbd-side .amount-card { margin-top: 14px; padding: 22px 26px 24px; gap: 14px; max-width: 580px; }
+body.kbd-side .phone-card__label { font-size: 14px; }
+body.kbd-side .phone-input,
+body.kbd-side .amount-input { font-size: 32px; padding: 16px 20px; }
+body.kbd-side .cta-btn { padding: 18px 28px; font-size: 22px; }
+body.kbd-side .badge { padding: 6px 14px; font-size: 12px; }
+
+/* На шаге "Сумма" — quiz-head слева сверху, не absolute */
+body.kbd-side .quiz-head {
+  position: static;
+  transform: none;
+  align-items: flex-start;
+  margin-bottom: 4px;
+}
+body.kbd-side .quiz-step { margin-top: 0; }
+
+/* Клавиатура — справа, по центру вертикали */
+body.kbd-side .keyboard {
   left: auto;
   right: 32px;
   bottom: auto;
@@ -383,11 +497,11 @@ body.lead-active .keyboard {
   padding: 14px 16px 18px;
   transform: translateY(-50%);
 }
-body.lead-active .keyboard.is-open { transform: translateY(-50%); }
-body.lead-active .keyboard__grip { display: none; }
-body.lead-active .keyboard__grid { gap: 10px; }
-body.lead-active .key { height: 64px; font-size: 28px; }
-body.lead-active [data-key="hide"] { visibility: hidden; pointer-events: none; }
+body.kbd-side .keyboard.is-open { transform: translateY(-50%); }
+body.kbd-side .keyboard__grip { display: none; }
+body.kbd-side .keyboard__grid { gap: 10px; }
+body.kbd-side .key { height: 64px; font-size: 28px; }
+body.kbd-side [data-key="hide"] { visibility: hidden; pointer-events: none; }
 
 /* === RESOLUTIONS ========================================================= */
 /* 1280x1024 — baseline */
@@ -398,6 +512,8 @@ body.lead-active [data-key="hide"] { visibility: hidden; pointer-events: none; }
   .choice { min-height: 280px; padding: 36px 24px; }
   .choice__title { font-size: 28px; }
   .topbar__logo { height: 44px; }
+  .quiz-option { min-height: 200px; padding: 22px 18px; }
+  .quiz-option__title { font-size: 22px; }
 }
 
 @media (max-width: 900px) {
@@ -405,7 +521,6 @@ body.lead-active [data-key="hide"] { visibility: hidden; pointer-events: none; }
   .choice { min-height: 200px; padding: 28px 24px; flex-direction: row; text-align: left; justify-content: flex-start; gap: 24px; }
   .choice__icon { width: 72px; height: 72px; flex-shrink: 0; }
   .screen__title { font-size: 36px; }
-  .back-btn { top: 88px; left: 24px; }
   #app { padding: 88px 24px 32px; }
   .topbar { padding: 16px 24px; }
 }
@@ -414,8 +529,10 @@ body.lead-active [data-key="hide"] { visibility: hidden; pointer-events: none; }
   .screen__title { font-size: 44px; }
   .choice { min-height: 240px; padding: 30px 24px; }
   .choice__icon { width: 76px; height: 76px; }
-  .phone-card { padding: 28px; margin-top: 18px; }
-  .phone-input { font-size: 30px; padding: 18px 20px; }
+  .phone-card,
+  .amount-card { padding: 28px; margin-top: 18px; }
+  .phone-input,
+  .amount-input { font-size: 30px; padding: 18px 20px; }
   .cta-btn { padding: 18px 28px; font-size: 22px; }
   .key { height: 64px; font-size: 28px; }
 }

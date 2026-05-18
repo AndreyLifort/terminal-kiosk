@@ -7,10 +7,30 @@
       'start.title':        'Что вас интересует?',
       'start.subtitle':     'Коснитесь нужного действия на экране',
       'start.crypto.title': 'Купить криптовалюту',
-      'start.crypto.desc':  'USDT, BTC и другие — за наличные',
+      'start.crypto.desc':  'USDT — за наличные рубли',
       'start.ai.title':     'Оплатить нейросети',
       'start.ai.desc':      'ChatGPT, Midjourney и другие сервисы',
       'start.hint':         'Безопасно · Анонимно · Быстро',
+
+      'quiz.step':              'Шаг',
+      'quiz.of':                'из',
+      'quiz.next':              'Далее',
+
+      'buy.currency.title':     'Выберите валюту',
+      'buy.currency.subtitle':  'Пока доступен только USDT — Tether',
+      'buy.currency.usdt.desc': 'Tether — стейблкоин 1:1 к доллару США',
+
+      'buy.op.title':           'Выберите тип операции',
+      'buy.op.subtitle':        'Что вы хотите сделать?',
+      'buy.op.buy.title':       'Покупка',
+      'buy.op.buy.desc':        'Внести рубли → получить USDT',
+      'buy.op.sell.title':      'Продажа',
+      'buy.op.sell.desc':       'Передать USDT → получить рубли',
+
+      'buy.amount.title':       'Введите сумму',
+      'buy.amount.subtitle':    'Сумма операции в рублях',
+      'buy.amount.label':       'Сумма, ₽',
+      'buy.amount.hint':        'Минимум 100 ₽',
 
       'lead.back':          'Назад',
       'lead.badge':         'Скоро запуск',
@@ -28,10 +48,30 @@
       'start.title':        'What can we help with?',
       'start.subtitle':     'Tap the option you need',
       'start.crypto.title': 'Buy cryptocurrency',
-      'start.crypto.desc':  'USDT, BTC and others — for cash',
+      'start.crypto.desc':  'USDT — for cash in rubles',
       'start.ai.title':     'Pay for AI services',
       'start.ai.desc':      'ChatGPT, Midjourney and other apps',
       'start.hint':         'Secure · Anonymous · Fast',
+
+      'quiz.step':              'Step',
+      'quiz.of':                'of',
+      'quiz.next':              'Next',
+
+      'buy.currency.title':     'Choose a currency',
+      'buy.currency.subtitle':  'Only USDT is available for now',
+      'buy.currency.usdt.desc': 'Tether — a stablecoin pegged 1:1 to the US dollar',
+
+      'buy.op.title':           'Choose operation type',
+      'buy.op.subtitle':        'What do you want to do?',
+      'buy.op.buy.title':       'Buy',
+      'buy.op.buy.desc':        'Insert rubles → receive USDT',
+      'buy.op.sell.title':      'Sell',
+      'buy.op.sell.desc':       'Send USDT → receive rubles',
+
+      'buy.amount.title':       'Enter the amount',
+      'buy.amount.subtitle':    'Operation amount in rubles',
+      'buy.amount.label':       'Amount, ₽',
+      'buy.amount.hint':        'Minimum 100 ₽',
 
       'lead.back':          'Back',
       'lead.badge':         'Coming soon',

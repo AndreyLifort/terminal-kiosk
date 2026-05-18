@@ -10,7 +10,7 @@
   <meta http-equiv="Expires" content="0" />
   <title>Криптомат — крипто-терминал</title>
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%23C9921A'/%3E%3Ctext x='50' y='70' font-family='Segoe UI,sans-serif' font-size='60' font-weight='800' fill='%230A1628' text-anchor='middle'%3EК%3C/text%3E%3C/svg%3E" />
-  <link rel="stylesheet" href="./styles.css?v=2026-05-16-3" />
+  <link rel="stylesheet" href="./styles.css?v=2026-05-16-4" />
 </head>
 <body>
   <header class="topbar">
@@ -34,12 +34,12 @@
         <p class="screen__subtitle" data-i18n="start.subtitle">Коснитесь нужного действия на экране</p>
 
         <div class="choice-grid">
-          <button class="choice" data-action="lead" data-src="crypto" type="button">
+          <button class="choice" data-action="buy" type="button">
             <span class="choice__icon" aria-hidden="true">
-              <object type="image/svg+xml" data="./assets/icon-crypto.svg"></object>
+              <object type="image/svg+xml" data="./assets/icon-crypto.svg?v=2026-05-16-4"></object>
             </span>
             <span class="choice__title" data-i18n="start.crypto.title">Купить криптовалюту</span>
-            <span class="choice__desc"  data-i18n="start.crypto.desc">USDT, BTC и другие — за наличные</span>
+            <span class="choice__desc"  data-i18n="start.crypto.desc">USDT — за наличные рубли</span>
           </button>
 
           <button class="choice" data-action="lead" data-src="ai" type="button">
@@ -55,7 +55,101 @@
       </div>
     </section>
 
-    <!-- ЭКРАН 2: ВВОД ТЕЛЕФОНА -->
+    <!-- ЭКРАН 2: КВИЗ ПОКУПКИ (3 шага внутри) -->
+    <section class="screen screen--buy" data-screen="buy" hidden>
+      <header class="quiz-head">
+        <div class="quiz-progress">
+          <span class="quiz-progress__dot" data-dot="1"></span>
+          <span class="quiz-progress__dot" data-dot="2"></span>
+          <span class="quiz-progress__dot" data-dot="3"></span>
+        </div>
+        <div class="quiz-progress__label">
+          <span data-i18n="quiz.step">Шаг</span>
+          <span id="buy-step-num">1</span>
+          <span data-i18n="quiz.of">из</span>
+          <span>3</span>
+        </div>
+      </header>
+
+      <!-- ШАГ 1: ВАЛЮТА -->
+      <div class="quiz-step" data-buy-step="1">
+        <h1 class="screen__title" data-i18n="buy.currency.title">Выберите валюту</h1>
+        <p class="screen__subtitle" data-i18n="buy.currency.subtitle">Пока доступен только USDT — Tether</p>
+
+        <div class="quiz-options quiz-options--single">
+          <button class="quiz-option" data-action="select-currency" data-value="USDT" type="button">
+            <span class="quiz-option__icon" aria-hidden="true">
+              <object type="image/svg+xml" data="./assets/icon-crypto.svg?v=2026-05-16-4"></object>
+            </span>
+            <span class="quiz-option__title">USDT</span>
+            <span class="quiz-option__desc" data-i18n="buy.currency.usdt.desc">Tether — стейблкоин 1:1 к доллару США</span>
+          </button>
+        </div>
+
+        <div class="quiz-actions">
+          <button class="back-btn" data-action="back" type="button">
+            <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+            <span data-i18n="lead.back">Назад</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- ШАГ 2: ТИП ОПЕРАЦИИ -->
+      <div class="quiz-step" data-buy-step="2" hidden>
+        <h1 class="screen__title" data-i18n="buy.op.title">Выберите тип операции</h1>
+        <p class="screen__subtitle" data-i18n="buy.op.subtitle">Что вы хотите сделать?</p>
+
+        <div class="quiz-options quiz-options--row">
+          <button class="quiz-option" data-action="select-op" data-value="buy" type="button">
+            <span class="quiz-option__icon" aria-hidden="true">
+              <svg viewBox="0 0 96 96" fill="none" stroke="currentColor" stroke-width="5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M28 60L60 28"/>
+                <path d="M34 28h26v26"/>
+              </svg>
+            </span>
+            <span class="quiz-option__title" data-i18n="buy.op.buy.title">Покупка</span>
+            <span class="quiz-option__desc"  data-i18n="buy.op.buy.desc">Внести рубли → получить USDT</span>
+          </button>
+
+          <button class="quiz-option" data-action="select-op" data-value="sell" type="button">
+            <span class="quiz-option__icon" aria-hidden="true">
+              <svg viewBox="0 0 96 96" fill="none" stroke="currentColor" stroke-width="5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M28 36L60 68"/>
+                <path d="M34 68h26V42"/>
+              </svg>
+            </span>
+            <span class="quiz-option__title" data-i18n="buy.op.sell.title">Продажа</span>
+            <span class="quiz-option__desc"  data-i18n="buy.op.sell.desc">Передать USDT → получить рубли</span>
+          </button>
+        </div>
+
+        <div class="quiz-actions">
+          <button class="back-btn" data-action="back" type="button">
+            <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+            <span data-i18n="lead.back">Назад</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- ШАГ 3: СУММА -->
+      <div class="quiz-step" data-buy-step="3" hidden>
+        <h1 class="screen__title" data-i18n="buy.amount.title">Введите сумму</h1>
+        <p class="screen__subtitle" data-i18n="buy.amount.subtitle">Сумма операции в рублях</p>
+
+        <div class="amount-card">
+          <label class="phone-card__label" for="amount-input" data-i18n="buy.amount.label">Сумма, ₽</label>
+          <input id="amount-input" class="amount-input" type="text" inputmode="none" readonly value="0 ₽" autocomplete="off" />
+          <p class="amount-hint" data-i18n="buy.amount.hint">Минимум 100 ₽</p>
+          <button id="buy-next-btn" class="cta-btn" type="button" disabled data-i18n="quiz.next">Далее</button>
+          <button class="back-btn" data-action="back" type="button">
+            <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+            <span data-i18n="lead.back">Назад</span>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ЭКРАН 3: ВВОД ТЕЛЕФОНА (lead-capture) -->
     <section class="screen screen--lead" data-screen="lead" hidden>
       <div class="screen__inner">
         <div class="badge" data-i18n="lead.badge">Скоро запуск</div>
@@ -85,7 +179,7 @@
       </div>
     </section>
 
-    <!-- ЭКРАН 3: СПАСИБО -->
+    <!-- ЭКРАН 4: СПАСИБО -->
     <section class="screen screen--thanks" data-screen="thanks" hidden>
       <div class="screen__inner">
         <div class="thanks-icon">
@@ -125,9 +219,9 @@
     </div>
   </div>
 
-  <script src="./config.js?v=2026-05-16-3"></script>
-  <script src="./i18n.js?v=2026-05-16-3"></script>
-  <script src="./keyboard.js?v=2026-05-16-3"></script>
-  <script src="./app.js?v=2026-05-16-3"></script>
+  <script src="./config.js?v=2026-05-16-4"></script>
+  <script src="./i18n.js?v=2026-05-16-4"></script>
+  <script src="./keyboard.js?v=2026-05-16-4"></script>
+  <script src="./app.js?v=2026-05-16-4"></script>
 </body>
 </html>

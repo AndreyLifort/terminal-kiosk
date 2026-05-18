@@ -1,9 +1,6 @@
 /**
  * Google Apps Script для приёма лидов с крипто-терминала.
  * Деплоится как Web App, см. README.md рядом.
- *
- * Перед деплоем подставьте SHEET_ID — ID Google Sheet,
- * куда падают строки (можно взять из URL таблицы, между /d/ и /edit).
  */
 
 const SHEET_ID   = '1Pjp_QZRNGagkISCFRNCoOVlsxLaOtgNz_par9XuFBAk';
@@ -19,6 +16,10 @@ function doPost(e) {
       new Date(),
       String(data.phone      || ''),
       String(data.source     || ''),     // 'crypto' | 'ai'
+      String(data.op         || ''),     // 'buy' | 'sell' | ''
+      String(data.currency   || ''),     // 'USDT' | ''
+      data.amount === '' || data.amount == null ? '' : Number(data.amount),
+      String(data.lang       || ''),     // 'ru' | 'en'
       String(data.userAgent  || ''),
       String(data.terminalId || ''),
       String(data.ts         || ''),
@@ -35,8 +36,7 @@ function doPost(e) {
 }
 
 function doGet() {
-  // Health check для быстрой проверки в браузере: открыть URL без параметров
   return ContentService
-    .createTextOutput(JSON.stringify({ ok: true, service: 'terminal-leads' }))
+    .createTextOutput(JSON.stringify({ ok: true, service: 'terminal-leads', version: 2 }))
     .setMimeType(ContentService.MimeType.JSON);
 }
